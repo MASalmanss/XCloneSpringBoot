@@ -1,4 +1,4 @@
-package com.XCloneSpringBootApp.XCloneApp.entity;
+package com.XCloneAppSpring.XCloneApp.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -11,7 +11,6 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-
 @Entity
 @Data
 public class Users implements UserDetails {
@@ -23,18 +22,19 @@ public class Users implements UserDetails {
     @Column(nullable = false)
     private String fullName;
 
-    @Column(unique = true , nullable = false , length = 100)
+    @Column(nullable = false, unique = true)
     private String email;
+
 
     @Column(nullable = false)
     private String password;
 
+
     @CreationTimestamp
-    @Column(updatable = false)
-    private Date createdDate;
+    private Date createdTime;
 
     @UpdateTimestamp
-    private Date updateDate;
+    private Date updatedTime;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -53,21 +53,22 @@ public class Users implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return UserDetails.super.isAccountNonExpired();
+        return false;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return UserDetails.super.isAccountNonLocked();
+        return false;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return UserDetails.super.isCredentialsNonExpired();
+        return false;
     }
 
     @Override
     public boolean isEnabled() {
-        return UserDetails.super.isEnabled();
+        return false;
     }
+
 }
