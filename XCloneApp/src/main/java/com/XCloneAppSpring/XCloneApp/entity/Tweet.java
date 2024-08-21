@@ -6,24 +6,27 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Data
-public class Users {
+public class Tweet {
 
     @Id
     @GeneratedValue
     private UUID id;
 
-    @OneToMany(mappedBy = "user")
-    private List<Tweet> tweets;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private Users user;
 
+    private String content;
 
     @CreationTimestamp
     private Date created_time;
 
     @UpdateTimestamp
     private Date updated_time;
+
+    private Integer liked_count;
 }
