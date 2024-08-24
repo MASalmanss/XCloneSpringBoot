@@ -1,4 +1,4 @@
-package com.XCloneAppSpring.XCloneApp.dto;
+package com.XCloneAppSpring.XCloneApp.dto.response;
 
 import lombok.Data;
 

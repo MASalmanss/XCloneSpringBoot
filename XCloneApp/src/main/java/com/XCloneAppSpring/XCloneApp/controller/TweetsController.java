@@ -1,6 +1,6 @@
 package com.XCloneAppSpring.XCloneApp.controller;
 
-import com.XCloneAppSpring.XCloneApp.dto.TweetResource;
+import com.XCloneAppSpring.XCloneApp.dto.response.TweetResource;
 import com.XCloneAppSpring.XCloneApp.mappers.TweetMapper;
 import com.XCloneAppSpring.XCloneApp.service.TweetService;
 import lombok.RequiredArgsConstructor;

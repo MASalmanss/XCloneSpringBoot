@@ -1,9 +1,8 @@
 package com.XCloneAppSpring.XCloneApp.mappers;
 
-import com.XCloneAppSpring.XCloneApp.dto.TweetResource;
+import com.XCloneAppSpring.XCloneApp.dto.response.TweetResource;
 import com.XCloneAppSpring.XCloneApp.entity.Tweet;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 import java.util.List;
 

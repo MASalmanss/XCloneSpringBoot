@@ -30,4 +30,6 @@ public class Users {
 
     @UpdateTimestamp
     private Date updated_time;
+
+    private boolean is_active;
 }
