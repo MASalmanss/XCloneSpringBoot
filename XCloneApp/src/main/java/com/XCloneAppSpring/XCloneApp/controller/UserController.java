@@ -1,12 +1,16 @@
 package com.XCloneAppSpring.XCloneApp.controller;
 
 import com.XCloneAppSpring.XCloneApp.dto.request.UserCreateDto;
+import com.XCloneAppSpring.XCloneApp.dto.response.TweetResource;
 import com.XCloneAppSpring.XCloneApp.dto.response.UserResource;
-import com.XCloneAppSpring.XCloneApp.entity.Users;
+import com.XCloneAppSpring.XCloneApp.mappers.TweetMapper;
+import com.XCloneAppSpring.XCloneApp.mappers.UsersMapper;
+import com.XCloneAppSpring.XCloneApp.service.TweetService;
 import com.XCloneAppSpring.XCloneApp.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -14,14 +18,26 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+    private final TweetService tweetService;
+    private final TweetMapper tweetMapper;
+    private final UsersMapper usersMapper;
 
     @PostMapping("")
     public UserResource create(@RequestBody UserCreateDto userCreateDto){
-       return userService.createUser(userCreateDto);
+       var user = userService.createUser(userCreateDto);
+       return usersMapper.userToUserresource(user);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public UserResource findById(@PathVariable UUID id){
-       return userService.getByIdUser(id);
+
+        var user =  userService.getByIdUser(id);
+        return usersMapper.userToUserresource(user);
+    }
+
+    @GetMapping("/{id}/tweets")
+    public List<TweetResource> getTweets(@PathVariable UUID id){
+       var tweets = tweetService.findAllByUserId(id);
+       return tweetMapper.TweetListToTweetResourceList(tweets);
     }
 }

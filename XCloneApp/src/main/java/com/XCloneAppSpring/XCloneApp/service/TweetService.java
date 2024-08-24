@@ -21,4 +21,13 @@ public class TweetService {
     public Tweet findById(UUID id){
         return tweetRepository.findById(id).orElseThrow(()-> new RuntimeException("Boyle bir kayit yok !"));
     }
+
+    public List<Tweet> findAllByUserId(UUID id){
+        return tweetRepository.findAllByUserId(id);
+    }
+
+    public Tweet createTweet(Tweet tweet){
+        tweet.setLiked_count(0);
+        return tweetRepository.save(tweet);
+    }
 }

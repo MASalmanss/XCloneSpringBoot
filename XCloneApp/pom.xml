@@ -96,6 +96,14 @@
 			<scope>provided</scope>
 		</dependency>
 
+			<!-- springdoc-openapi-ui for Swagger UI -->
+			<dependency>
+				<groupId>org.springdoc</groupId>
+				<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+				<version>2.2.0</version>
+			</dependency>
+
+
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>

@@ -16,17 +16,17 @@ public class UserService {
     private final UserRepository userRepository;
     private final UsersMapper usersMapper;
 
-    public UserResource createUser(UserCreateDto userCreateDto){
+    public Users createUser(UserCreateDto userCreateDto){
         var user = usersMapper.userDtoToUsers(userCreateDto);
         user.set_active(true);
         userRepository.save(user);
-        return usersMapper.userToUserresource(user);
+        return user;
     }
 
-    public UserResource getByIdUser(UUID id){
+    public Users getByIdUser(UUID id){
         var users = userRepository.findById(id).orElseThrow(()-> new RuntimeException("User not found !"));
         if(users.is_active()){
-            return usersMapper.userToUserresource(users);
+            return users;
         }
         throw new RuntimeException("User not found !");
     }
