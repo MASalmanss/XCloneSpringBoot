@@ -17,6 +17,10 @@ public class Users {
     @GeneratedValue
     private UUID id;
 
+    private String username;
+
+    private String description;
+
     @OneToMany(mappedBy = "user")
     private List<Tweet> tweets;
 

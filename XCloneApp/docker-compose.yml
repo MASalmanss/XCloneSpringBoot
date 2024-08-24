@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  postgres:
+    container_name: postgresXClone
+    image: postgres:latest
+    ports:
+      - "5490:5432"
+    volumes:
+      - postgres_volume:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=postgres_default_Db
+
+volumes:
+  postgres_volume:
