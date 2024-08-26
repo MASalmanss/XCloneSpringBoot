@@ -12,6 +12,11 @@ import java.util.UUID;
 public interface TweetRepository extends JpaRepository<Tweet , UUID> {
     List<Tweet> findAllByUserId(UUID uuid);
 
-    @Query("select t from Tweet t where t.user.id In :UserIds and t.created_time >= :OneHourAgo order by t.created_time asc ")
-    List<Tweet> findTweetsByUserIdList(@Param("UserIds") List<UUID> list , @Param("OneHourAgo") Date oneHourAgo);
+    @Query("SELECT t FROM Tweet t WHERE t.user.id IN :userIds AND t.created_time >= :oneHourAgo ORDER BY t.created_time ASC")
+    List<Tweet> findTweetsByUserIdList(@Param("userIds") List<UUID> userIds, @Param("oneHourAgo") Date oneHourAgo);
+
+
+
+
+
 }
