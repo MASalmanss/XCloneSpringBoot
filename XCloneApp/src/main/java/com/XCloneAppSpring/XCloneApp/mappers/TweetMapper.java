@@ -10,10 +10,10 @@ import java.util.List;
 
 @Mapper(componentModel = "Spring")
 public interface TweetMapper {
+
     TweetResource TweetToTweetResource(Tweet tweet);
 
     List<TweetResource> TweetListToTweetResourceList(List<Tweet> tweets);
 
-    @Mapping(source =  "userId", target = "id")
     Tweet tweetCreateDtoToTweet(TweetCreateDto tweetCreateDto);
 }
