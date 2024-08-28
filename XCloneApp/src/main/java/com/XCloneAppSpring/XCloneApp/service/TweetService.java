@@ -33,10 +33,9 @@ public class TweetService {
         return tweetRepository.save(tweet);
     }
 
-    public List<Tweet> getTweetsForUsers(){
-        List<UUID> uuidList = List.of(UUID.fromString("36f2ad21-013f-48be-ab09-7daf21b9b0eb") , UUID.fromString("ec5c6b00-42f8-42f5-99fd-9f463744a04d") , UUID.fromString("eaf07613-1f36-4502-9784-2268b854d8a8"));
+    public List<Tweet> getTweetsForUsers(UsersListTweetDto usersListTweetDto){
         Date oneHourAgo = new Date(System.currentTimeMillis() - 3600 * 1000);
-      var result = tweetRepository.findTweetsByUserIdList(uuidList , oneHourAgo);
+        var result = tweetRepository.findTweetsByUserIdList(usersListTweetDto.getUuidList() , oneHourAgo);
        return result;
     }
 }

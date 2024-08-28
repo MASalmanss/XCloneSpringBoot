@@ -43,16 +43,11 @@ public class TweetsController {
        return tweetMapper.TweetToTweetResource(tweetNew);
     }
 
-  /*  @PostMapping("/users")
-    public List<TweetResource> getTweetsForUsers(@RequestBody UsersListTweetDto usersListTweetDto){
-        var tweetsForOneHour = tweetService.getTweetsForUsers()
-    }
 
-   */
 
     @PostMapping("/users")
-    public List<TweetResource> getTweetsForUsers(){
-        var tweetsForOneHour = tweetService.getTweetsForUsers();
+    public List<TweetResource> getTweetsForUsers(@RequestBody UsersListTweetDto usersListTweetDto){
+        var tweetsForOneHour = tweetService.getTweetsForUsers(usersListTweetDto);
         return tweetMapper.TweetListToTweetResourceList(tweetsForOneHour);
     }
 }
