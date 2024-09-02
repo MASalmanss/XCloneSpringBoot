@@ -7,8 +7,9 @@ import java.util.UUID;
 
 @Data
 public class UserResource {
-    private UUID id;
+    private UUID id; // kaldır
     private String username;
+    //Fullname
     private String description;
-    private Date created_time;
+    private Date created_time;// kaldır
 }

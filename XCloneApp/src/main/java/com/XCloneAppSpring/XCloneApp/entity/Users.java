@@ -19,6 +19,8 @@ public class Users {
 
     private String username;
 
+    private String fullname;
+
     private String description;
 
     @OneToMany(mappedBy = "user")

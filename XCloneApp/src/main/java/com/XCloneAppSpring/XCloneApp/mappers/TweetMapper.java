@@ -11,6 +11,8 @@ import java.util.List;
 @Mapper(componentModel = "Spring")
 public interface TweetMapper {
 
+    @Mapping(target = "fullname" , source = "user.fullname")
+    @Mapping(target = "username" , source = "user.username")
     @Mapping(target = "user_id" , source = "user.id")
     TweetResource TweetToTweetResource(Tweet tweet);
 

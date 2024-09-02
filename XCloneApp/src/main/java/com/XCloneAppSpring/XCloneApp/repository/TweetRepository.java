@@ -15,7 +15,7 @@ public interface TweetRepository extends JpaRepository<Tweet , UUID> {
     @Query("SELECT t FROM Tweet t WHERE t.user.id IN :userIds AND t.created_time >= :oneHourAgo ORDER BY t.created_time ASC")
     List<Tweet> findTweetsByUserIdList(@Param("userIds") List<UUID> userIds, @Param("oneHourAgo") Date oneHourAgo);
 
-
+    //
 
 
 
