@@ -1,6 +1,8 @@
 package com.XCloneAppSpring.XCloneApp.service;
 
+import com.XCloneAppSpring.XCloneApp.dto.request.TweetUpdateDto;
 import com.XCloneAppSpring.XCloneApp.dto.request.UsersListTweetDto;
+import com.XCloneAppSpring.XCloneApp.dto.response.TweetResource;
 import com.XCloneAppSpring.XCloneApp.entity.Tweet;
 import com.XCloneAppSpring.XCloneApp.repository.TweetRepository;
 import lombok.RequiredArgsConstructor;
@@ -37,5 +39,12 @@ public class TweetService {
         Date oneHourAgo = new Date(System.currentTimeMillis() - 3600 * 1000);
         var result = tweetRepository.findTweetsByUserIdList(usersListTweetDto.getUuidList() , oneHourAgo);
        return result;
+    }
+
+    public Tweet updateTweetById(TweetUpdateDto tweetUpdateDto){
+        Tweet tweet = tweetRepository.findById(tweetUpdateDto.getId()).orElseThrow(()-> new RuntimeException("Tweet not found exception"));
+        tweet.setContent(tweetUpdateDto.getContent());
+        return tweetRepository.save(tweet);
+
     }
 }

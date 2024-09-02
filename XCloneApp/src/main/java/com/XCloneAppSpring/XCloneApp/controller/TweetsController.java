@@ -1,6 +1,7 @@
 package com.XCloneAppSpring.XCloneApp.controller;
 
 import com.XCloneAppSpring.XCloneApp.dto.request.TweetCreateDto;
+import com.XCloneAppSpring.XCloneApp.dto.request.TweetUpdateDto;
 import com.XCloneAppSpring.XCloneApp.dto.request.UsersListTweetDto;
 import com.XCloneAppSpring.XCloneApp.dto.response.TweetResource;
 import com.XCloneAppSpring.XCloneApp.mappers.TweetMapper;
@@ -49,5 +50,11 @@ public class TweetsController {
     public List<TweetResource> getTweetsForUsers(@RequestBody UsersListTweetDto usersListTweetDto){
         var tweetsForOneHour = tweetService.getTweetsForUsers(usersListTweetDto);
         return tweetMapper.TweetListToTweetResourceList(tweetsForOneHour);
+    }
+
+    @PutMapping("")
+    public TweetResource updateTweet(@RequestBody TweetUpdateDto tweetUpdateDto){
+        var tweet = tweetService.updateTweetById(tweetUpdateDto);
+        return tweetMapper.TweetToTweetResource(tweet);
     }
 }
