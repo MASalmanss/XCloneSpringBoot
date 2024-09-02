@@ -1,6 +1,7 @@
 package com.XCloneAppSpring.XCloneApp.service;
 
 import com.XCloneAppSpring.XCloneApp.dto.request.UserCreateDto;
+import com.XCloneAppSpring.XCloneApp.dto.request.UserUpdateDto;
 import com.XCloneAppSpring.XCloneApp.dto.response.UserResource;
 import com.XCloneAppSpring.XCloneApp.entity.Users;
 import com.XCloneAppSpring.XCloneApp.mappers.UsersMapper;
@@ -29,5 +30,12 @@ public class UserService {
             return users;
         }
         throw new RuntimeException("User not found !");
+    }
+
+    public Users updateUserById(UserUpdateDto userUpdateDto){
+        Users users = userRepository.findById(userUpdateDto.getId()).orElseThrow(()-> new RuntimeException("User not found !"));
+        users.setDescription(userUpdateDto.getDescription());
+        users.setFullname(userUpdateDto.getFullname());
+        return userRepository.save(users);
     }
 }

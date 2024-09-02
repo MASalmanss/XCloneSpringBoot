@@ -9,7 +9,7 @@ import java.util.UUID;
 public class UserResource {
     private UUID id; // kaldır
     private String username;
-    //Fullname
+    private String fullname;//Fullname
     private String description;
-    private Date created_time;// kaldır
+   // private Date created_time;// kaldır
 }

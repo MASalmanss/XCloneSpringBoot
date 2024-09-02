@@ -1,6 +1,7 @@
 package com.XCloneAppSpring.XCloneApp.controller;
 
 import com.XCloneAppSpring.XCloneApp.dto.request.UserCreateDto;
+import com.XCloneAppSpring.XCloneApp.dto.request.UserUpdateDto;
 import com.XCloneAppSpring.XCloneApp.dto.response.TweetResource;
 import com.XCloneAppSpring.XCloneApp.dto.response.UserResource;
 import com.XCloneAppSpring.XCloneApp.mappers.TweetMapper;
@@ -25,6 +26,12 @@ public class UserController {
     @PostMapping("")
     public UserResource create(@RequestBody UserCreateDto userCreateDto){
        var user = userService.createUser(userCreateDto);
+       return usersMapper.userToUserresource(user);
+    }
+
+    @PutMapping("")
+    private UserResource  updateByUserId(@RequestBody UserUpdateDto userUpdateDto){
+       var user = userService.updateUserById(userUpdateDto);
        return usersMapper.userToUserresource(user);
     }
 
