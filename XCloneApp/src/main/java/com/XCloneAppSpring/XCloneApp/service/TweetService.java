@@ -1,5 +1,6 @@
 package com.XCloneAppSpring.XCloneApp.service;
 
+import com.XCloneAppSpring.XCloneApp.dto.request.TweetLikedDto;
 import com.XCloneAppSpring.XCloneApp.dto.request.TweetUpdateDto;
 import com.XCloneAppSpring.XCloneApp.dto.request.UsersListTweetDto;
 import com.XCloneAppSpring.XCloneApp.dto.response.TweetResource;
@@ -46,5 +47,12 @@ public class TweetService {
         tweet.setContent(tweetUpdateDto.getContent());
         return tweetRepository.save(tweet);
 
+    }
+
+    public void tweetLike(TweetLikedDto tweetLikedDto){
+        Tweet tweet = tweetRepository.findById(tweetLikedDto.getId()).orElseThrow(()-> new RuntimeException("Tweet not found !"));
+        var newValue = Math.max( 0 , tweet.getLiked_count() + (tweetLikedDto.getValue()));
+        tweet.setLiked_count(newValue);
+        tweetRepository.save(tweet);
     }
 }

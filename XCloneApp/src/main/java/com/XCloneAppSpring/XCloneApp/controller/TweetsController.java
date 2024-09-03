@@ -1,6 +1,7 @@
 package com.XCloneAppSpring.XCloneApp.controller;
 
 import com.XCloneAppSpring.XCloneApp.dto.request.TweetCreateDto;
+import com.XCloneAppSpring.XCloneApp.dto.request.TweetLikedDto;
 import com.XCloneAppSpring.XCloneApp.dto.request.TweetUpdateDto;
 import com.XCloneAppSpring.XCloneApp.dto.request.UsersListTweetDto;
 import com.XCloneAppSpring.XCloneApp.dto.response.TweetResource;
@@ -8,6 +9,7 @@ import com.XCloneAppSpring.XCloneApp.mappers.TweetMapper;
 import com.XCloneAppSpring.XCloneApp.service.TweetService;
 import com.XCloneAppSpring.XCloneApp.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -56,5 +58,11 @@ public class TweetsController {
     public TweetResource updateTweet(@RequestBody TweetUpdateDto tweetUpdateDto){
         var tweet = tweetService.updateTweetById(tweetUpdateDto);
         return tweetMapper.TweetToTweetResource(tweet);
+    }
+
+    @PutMapping("/liked")
+    public ResponseEntity<Void> liked(@RequestBody TweetLikedDto tweetLikedDto){
+        tweetService.tweetLike(tweetLikedDto);
+        return ResponseEntity.ok().build();
     }
 }
