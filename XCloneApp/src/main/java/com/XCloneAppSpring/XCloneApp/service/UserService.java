@@ -51,7 +51,6 @@ public class UserService {
     public void unFollowUser(UUID userId , UUID followerId){
         Users user = userRepository.findById(userId).orElseThrow(()-> new RuntimeException("User not found !"));
         Users follower = userRepository.findById(followerId).orElseThrow(()-> new RuntimeException("Fallower not found"));
-
         user.getFollowers().remove(follower);
         userRepository.save(user);
     }
