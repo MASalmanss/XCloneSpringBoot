@@ -12,4 +12,5 @@ public class UserResource {
     private String fullname;//Fullname
     private String description;
    // private Date created_time;// kaldır
+
 }

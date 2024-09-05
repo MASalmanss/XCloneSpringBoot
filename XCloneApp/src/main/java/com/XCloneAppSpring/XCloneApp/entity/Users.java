@@ -34,4 +34,11 @@ public class Users {
     private Date updated_time;
 
     private boolean is_active;
+
+    @ManyToMany
+    @JoinTable(name = "user_follwers" , joinColumns = @JoinColumn(name = "user_id") , inverseJoinColumns = @JoinColumn(name = "follower_id"))
+    private List<Users> followers;
+
+    @ManyToMany(mappedBy = "followers")
+    private List<Users> following;
 }

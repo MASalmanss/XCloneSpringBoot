@@ -9,6 +9,7 @@ import com.XCloneAppSpring.XCloneApp.mappers.UsersMapper;
 import com.XCloneAppSpring.XCloneApp.service.TweetService;
 import com.XCloneAppSpring.XCloneApp.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -46,5 +47,17 @@ public class UserController {
     public List<TweetResource> getTweets(@PathVariable UUID id){
        var tweets = tweetService.findAllByUserId(id);
        return tweetMapper.TweetListToTweetResourceList(tweets);
+    }
+
+    @PutMapping("/{userId}/follow/{followerId}")
+    public ResponseEntity<Void> followUser(@PathVariable UUID userId , @PathVariable UUID followerId){
+        userService.followUser(userId , followerId);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/{userId}/unfollow/{followerId}")
+    public ResponseEntity<Void> unFollowUser(@PathVariable UUID userId , @PathVariable UUID followerId){
+        userService.unFollowUser(userId , followerId);
+        return ResponseEntity.ok().build();
     }
 }

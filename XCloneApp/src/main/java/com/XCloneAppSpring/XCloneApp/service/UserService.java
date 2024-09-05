@@ -9,6 +9,7 @@ import com.XCloneAppSpring.XCloneApp.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -37,5 +38,21 @@ public class UserService {
         users.setDescription(userUpdateDto.getDescription());
         users.setFullname(userUpdateDto.getFullname());
         return userRepository.save(users);
+    }
+
+    public void followUser(UUID userId , UUID followerId){
+        Users user = userRepository.findById(userId).orElseThrow(()-> new RuntimeException("User not found !"));
+        Users follower = userRepository.findById(followerId).orElseThrow(()-> new RuntimeException("Fallower not found"));
+
+        user.getFollowers().add(follower);
+        userRepository.save(user);
+    }
+
+    public void unFollowUser(UUID userId , UUID followerId){
+        Users user = userRepository.findById(userId).orElseThrow(()-> new RuntimeException("User not found !"));
+        Users follower = userRepository.findById(followerId).orElseThrow(()-> new RuntimeException("Fallower not found"));
+
+        user.getFollowers().remove(follower);
+        userRepository.save(user);
     }
 }
