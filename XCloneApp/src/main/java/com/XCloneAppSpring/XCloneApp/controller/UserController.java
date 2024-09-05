@@ -4,6 +4,7 @@ import com.XCloneAppSpring.XCloneApp.dto.request.UserCreateDto;
 import com.XCloneAppSpring.XCloneApp.dto.request.UserUpdateDto;
 import com.XCloneAppSpring.XCloneApp.dto.response.TweetResource;
 import com.XCloneAppSpring.XCloneApp.dto.response.UserResource;
+import com.XCloneAppSpring.XCloneApp.dto.response.UserViewResource;
 import com.XCloneAppSpring.XCloneApp.mappers.TweetMapper;
 import com.XCloneAppSpring.XCloneApp.mappers.UsersMapper;
 import com.XCloneAppSpring.XCloneApp.service.TweetService;
@@ -59,5 +60,19 @@ public class UserController {
     public ResponseEntity<Void> unFollowUser(@PathVariable UUID userId , @PathVariable UUID followerId){
         userService.unFollowUser(userId , followerId);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/{id}/followings")
+    public ResponseEntity<List<UserViewResource>> getFollowings(@PathVariable UUID id){
+        var list = userService.getFollowings(id);
+        var mappingList = usersMapper.userListToUserViewResourceList(list);
+        return ResponseEntity.ok(mappingList);
+    }
+
+    @GetMapping("/{id}/followers")
+    public ResponseEntity<List<UserViewResource>> getFollowers(@PathVariable UUID id){
+        var list = userService.getFollowers(id);
+        var mappingList = usersMapper.userListToUserViewResourceList(list);
+        return ResponseEntity.ok(mappingList);
     }
 }

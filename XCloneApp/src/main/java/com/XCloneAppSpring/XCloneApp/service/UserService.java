@@ -54,4 +54,16 @@ public class UserService {
         user.getFollowers().remove(follower);
         userRepository.save(user);
     }
+
+    public List<Users> getFollowings(UUID id){
+        Users users = userRepository.findById(id).orElseThrow(()-> new RuntimeException("User not found !"));
+        List<Users> followings = users.getFollowing();
+        return followings;
+    }
+
+    public List<Users> getFollowers(UUID id){
+        Users users = userRepository.findById(id).orElseThrow(()-> new RuntimeException("User not found !"));
+        List<Users> followers = users.getFollowers();
+        return followers;
+    }
 }
