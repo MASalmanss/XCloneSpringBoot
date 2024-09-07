@@ -7,6 +7,7 @@ import com.XCloneAppSpring.XCloneApp.dto.response.TweetResource;
 import com.XCloneAppSpring.XCloneApp.entity.Tweet;
 import com.XCloneAppSpring.XCloneApp.repository.TweetRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -19,8 +20,8 @@ public class TweetService {
 
     private final TweetRepository tweetRepository;
 
-    public List<Tweet> findAll(){
-        return tweetRepository.findAll();
+    public List<Tweet> findAll() {
+        return tweetRepository.findAllSortedByCreatedTime();
     }
 
     public Tweet findById(UUID id){

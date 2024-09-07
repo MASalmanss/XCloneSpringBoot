@@ -17,6 +17,8 @@ public interface TweetRepository extends JpaRepository<Tweet , UUID> {
 
     //
 
+    @Query(value = "SELECT * FROM tweet ORDER BY created_time ASC", nativeQuery = true)
+    List<Tweet> findAllSortedByCreatedTime();
 
 
 }
