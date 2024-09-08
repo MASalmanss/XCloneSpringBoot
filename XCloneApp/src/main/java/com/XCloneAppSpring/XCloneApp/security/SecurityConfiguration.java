@@ -35,7 +35,7 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         auth -> auth.
-                                 requestMatchers("/auth/register" , "/auth/login").permitAll()
+                                 requestMatchers("/auth/**").permitAll()
                                 .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-resources/**", "/swagger-ui.html").permitAll()  // Swagger endpoint'lerini izinli yap
                                 .requestMatchers("/api/**").authenticated()
                                 .anyRequest().authenticated()

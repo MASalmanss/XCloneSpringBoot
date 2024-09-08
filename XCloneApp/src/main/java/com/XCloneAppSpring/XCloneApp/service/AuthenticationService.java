@@ -11,7 +11,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -23,38 +22,35 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
 
-
     public void register(UserCreateDto userCreateDto){
         Optional<Users> user = userRepository.findByEmail(userCreateDto.getEmail());
-        if (user.isPresent()) {
-            throw new RuntimeException("Email is already registered");
+        if(user.isEmpty()){
+            Users users = new Users();
+            users.setFullname(userCreateDto.getFullname());
+            users.set_active(true);
+            users.setUsernameData(userCreateDto.getUsername());
+            users.setPassword(passwordEncoder.encode(userCreateDto.getPassword()));
+            users.setEmail(userCreateDto.getEmail());
+            userRepository.save(users);
         }
 
-        Users users = new Users();
-        users.setFullname(userCreateDto.getFullname());
-        users.set_active(true);
-        users.setUsernameData(userCreateDto.getUsername());
-        users.setPassword(passwordEncoder.encode(userCreateDto.getPassword())); // Şifre şifrelenir
-        users.setEmail(userCreateDto.getEmail());
-        userRepository.save(users);  // Kullanıcı kaydedilir
     }
 
     public UserLoginResource login(UserLoginDto userLoginDto){
         Optional<Users> user = userRepository.findByEmail(userLoginDto.getEmail());
-
-        if (user.isEmpty()) {
-            throw new RuntimeException("User not found");
+        if(user.isPresent()){
+            if(passwordEncoder.matches(  userLoginDto.getPassword() , user.get().getPassword())){
+                authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                        userLoginDto.getEmail(),userLoginDto.getPassword()
+                ));
+                UserLoginResource userLoginResource = new UserLoginResource();
+                String token = jwtService.generateToken(user.get());
+                userLoginResource.setToken(token);
+                return userLoginResource;
+            }
+            throw new RuntimeException("Password not true");
         }
 
-        // authenticationManager şifre doğrulamasını yapar
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(userLoginDto.getEmail(), userLoginDto.getPassword())
-        );
-
-        // JWT token oluştur
-        UserLoginResource userLoginResource = new UserLoginResource();
-        String token = jwtService.generateToken(user.get());
-        userLoginResource.setToken(token);
-        return userLoginResource;
+            throw new RuntimeException("User not found");
     }
 }

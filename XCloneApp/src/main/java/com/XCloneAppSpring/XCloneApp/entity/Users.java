@@ -54,12 +54,6 @@ public class Users implements UserDetails {
 
 
 
-
-
-
-
-
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of();
@@ -77,22 +71,22 @@ public class Users implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;  // Hesap süresi dolmadıysa true döndür
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;  // Hesap kilitli değilse true döndür
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;  // Kimlik bilgileri süresi dolmadıysa true döndür
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
 
