@@ -4,14 +4,17 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Data
-public class Users {
+public class Users implements UserDetails {
 
     @Id
     @GeneratedValue
@@ -22,6 +25,11 @@ public class Users {
     private String fullname;
 
     private String description;
+
+    private String email;
+
+    @Column(nullable = false)
+    private String password;
 
     @OneToMany(mappedBy = "user")
     private List<Tweet> tweets;
@@ -41,4 +49,44 @@ public class Users {
 
     @ManyToMany(mappedBy = "followers")
     private List<Users> following;
+
+
+
+
+
+
+
+
+
+
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
+
+    @Override
+    public String getPassword() {
+        return "";
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
 }

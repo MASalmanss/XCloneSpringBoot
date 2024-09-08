@@ -7,6 +7,6 @@ public class UserCreateDto {
     private String username;
     private String fullname;//fulname
    // private String description; // kaldır
-    //password
-    //email
+    private String password;//password
+   private String email; //email
 }

@@ -1,4 +1,4 @@
-package com.XCloneAppSpring.XCloneApp.configuration;
+package com.XCloneAppSpring.XCloneApp.security;
 
 import com.XCloneAppSpring.XCloneApp.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
