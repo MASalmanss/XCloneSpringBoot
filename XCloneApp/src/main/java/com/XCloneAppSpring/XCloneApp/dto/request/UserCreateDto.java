@@ -10,3 +10,7 @@ public class UserCreateDto {
     private String password;//password
    private String email; //email
 }
+
+
+
+

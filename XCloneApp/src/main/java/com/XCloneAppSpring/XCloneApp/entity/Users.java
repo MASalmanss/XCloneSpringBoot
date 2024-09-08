@@ -20,7 +20,7 @@ public class Users implements UserDetails {
     @GeneratedValue
     private UUID id;
 
-    private String username;
+    private String usernameData;
 
     private String fullname;
 
@@ -67,7 +67,12 @@ public class Users implements UserDetails {
 
     @Override
     public String getPassword() {
-        return "";
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
     }
 
     @Override
@@ -89,4 +94,6 @@ public class Users implements UserDetails {
     public boolean isEnabled() {
         return false;
     }
+
+
 }

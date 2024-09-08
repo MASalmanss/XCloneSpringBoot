@@ -27,11 +27,13 @@ public class UserController {
     private final TweetMapper tweetMapper;
     private final UsersMapper usersMapper;
 
-    @PostMapping("")
+  /*  @PostMapping("")
     public UserResource create(@RequestBody UserCreateDto userCreateDto){
        var user = userService.createUser(userCreateDto);
        return usersMapper.userToUserresource(user);
     }
+
+   */
 
     @PutMapping("")
     private UserResource  updateByUserId(@RequestBody UserUpdateDto userUpdateDto){
