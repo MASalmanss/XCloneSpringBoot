@@ -46,6 +46,7 @@ public class AuthenticationService {
                 UserLoginResource userLoginResource = new UserLoginResource();
                 String token = jwtService.generateToken(user.get());
                 userLoginResource.setToken(token);
+                userLoginResource.setId(user.get().getId());
                 return userLoginResource;
             }
             throw new RuntimeException("Password not true");
