@@ -20,6 +20,7 @@ public class Tweet {
     @JoinColumn(name = "user_id")
     private Users user;
 
+    @Column(length = 1000)
     private String content;
 
     @CreationTimestamp

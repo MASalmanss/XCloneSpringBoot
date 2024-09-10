@@ -9,6 +9,7 @@ import com.XCloneAppSpring.XCloneApp.mappers.TweetMapper;
 import com.XCloneAppSpring.XCloneApp.mappers.UsersMapper;
 import com.XCloneAppSpring.XCloneApp.service.TweetService;
 import com.XCloneAppSpring.XCloneApp.service.UserService;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,8 +20,8 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/users")
-@RequiredArgsConstructor
 @PreAuthorize("isAuthenticated()")
+@RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
     private final TweetService tweetService;
@@ -36,7 +37,7 @@ public class UserController {
    */
 
     @PutMapping("")
-    private UserResource  updateByUserId(@RequestBody UserUpdateDto userUpdateDto){
+    public UserResource  updateByUserId(@RequestBody UserUpdateDto userUpdateDto){
        var user = userService.updateUserById(userUpdateDto);
        return usersMapper.userToUserresource(user);
     }

@@ -12,7 +12,7 @@ import java.util.List;
 public interface TweetMapper {
 
     @Mapping(target = "fullname" , source = "user.fullname")
-    @Mapping(target = "username" , source = "user.username")
+    @Mapping(target = "username" , source = "user.usernameData")
     @Mapping(target = "user_id" , source = "user.id")
     TweetResource TweetToTweetResource(Tweet tweet);
 
